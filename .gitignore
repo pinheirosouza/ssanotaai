@@ -1,0 +1,6 @@
+node_modules/
+*.lock
+
+test/.DS_Store
+
+routes/.DS_Store
