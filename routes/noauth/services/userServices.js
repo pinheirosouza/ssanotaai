@@ -22,6 +22,27 @@ module.exports = userServices = {
     }
   },
   /**
+   * @name getUserByEmail - Retorna os dados completos do user a aprtir do cpf
+   *
+   * @param {String} email - email de usuário
+   *
+   *@returns {User}
+   */
+  getUserByCpf: (cpf) => {
+    if (cpf) {
+      return userModel
+        .findOne({
+          cpf,
+        })
+        .exec();
+    } else {
+      return new Promise((resolve, reject) => {
+        resolve(undefined);
+      });
+    }
+  },
+
+  /**
    * @name createUser - Retorna os dados completos do user a aprtir do email
    *
    * @param {String} name - nome de usuário
@@ -35,14 +56,17 @@ module.exports = userServices = {
    */
   createUser: (name, email, phone, cpf, birthDate, address) => {
     return new Promise((resolve, reject) => {
-      if (email && name) {
+            if (email && cpf ) {
         email = email.toLowerCase();
         Promise.props({
           userWithEmail: userServices.getUserByEmail(email),
+          userWithCpf: userServices.getUserByCpf(cpf)
         })
           .then((info) => {
             if (info.userWithEmail != undefined) {
               reject("Já existe um usuário cadastrado com este Email!");
+            } else if(info.userWithCpf != undefined){
+              reject("Já existe um usuário cadastrado com este número de CPF!");
             } else {
               const newUser = new userModel({
                 name,

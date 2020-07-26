@@ -5,7 +5,11 @@ router.post(
   "/ssroutine",
   ssanotaaiController.createUser,
   ssanotaaiController.createPage,
-  ssanotaaiController.createEstablishment
+  ssanotaaiController.createEstablishment,
+  ssanotaaiController.updateEstablishmentUserId,
+  ssanotaaiController.createSale,
 );
+
+router.get("/listplans", ssanotaaiController.listPlans)
 
 module.exports = router;

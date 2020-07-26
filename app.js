@@ -1,6 +1,7 @@
 express = require("express");
 mongoose = require("mongoose");
 mongoose.Promise = require("q").Promise;
+config = require("./config/config.js");
 moment = require("moment-timezone");
 moment.tz.setDefault("America/Sao_Paulo");
 socketIO = require("socket.io");
@@ -14,7 +15,7 @@ multipartMiddleware = multipart({
   maxFilesSize: 1024 * 1024,
 });
 Sentry = require("@sentry/node");
-
+urlBasePayment = process.env.URLBASE_COMERCIAL || config.urlBasePayment;
 const bodyParser = require("body-parser");
 const database = require("./config/db");
 

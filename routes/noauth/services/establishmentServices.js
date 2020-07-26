@@ -25,4 +25,32 @@ module.exports = establishmentServices = {
       }
     });
   },
+
+  updateEstablishmentUserId: (establishmentId, userId, cpf_cnpj) => {
+    return new Promise((resolve, reject) => {
+      if (establishmentId) {
+        const update = establishmentModel
+          .findOneAndUpdate(
+            {
+              _id: establishmentId,
+            },
+            {
+              "sign.user": userId,
+              "sign.cpf_cnpj": cpf_cnpj,
+              "sign.active": false,
+            },
+            {
+              new: true,
+            }
+          )
+          .exec();
+        resolve(update);
+      } else reject("Erro ao atualizar Estabelecimento " + false);
+    });
+  },
+  getEstablishmentByPage: (pageId) => {
+    return establishmentModel.findOne({
+      page: pageId,
+    });
+  },
 };

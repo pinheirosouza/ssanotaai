@@ -1,5 +1,5 @@
 const DB_URI =
-  "mongodb+srv://user-admin:pclNGWEhiDSE110j@cluster0.fb4gq.mongodb.net/<dbname>?retryWrites=true&w=majority";
+  "mongodb+srv://user-admin:pclNGWEhiDSE110j@cluster0.fb4gq.mongodb.net/anotaai?retryWrites=true&w=majority";
 
 console.log("VERSAO::" + mongoose.version);
 
