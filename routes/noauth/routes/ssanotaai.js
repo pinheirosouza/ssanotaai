@@ -11,5 +11,7 @@ router.post(
 );
 
 router.get("/listplans", ssanotaaiController.listPlans)
+router.get("/listmodules", ssanotaaiController.listModules)
+
 
 module.exports = router;

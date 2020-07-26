@@ -8,6 +8,7 @@ socketIO = require("socket.io");
 ObjectIDForModel = mongoose.Schema.Types.ObjectId;
 ObjectId = mongoose.Types.ObjectId;
 mongoose.Promise = require("q").Promise;
+mongoosePaginate = require("mongoose-paginate");
 jwt = require("jsonwebtoken");
 Promise = require("bluebird");
 multipart = require("connect-multiparty");

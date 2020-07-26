@@ -4,8 +4,12 @@ const establishmentServices = require("../services/establishmentServices");
 const messageServices = require("../services/messageServices");
 const plansServices = require("../services/planServices")
 const salesServices = require("../services/salesServices")
+const modulesServices = require("../services/modulesServices")
+
 
 module.exports = userController = {
+
+  //--------------------- Rotina de vendas -------------------------//
   createUser: (req, res, next) => {
     req.register = {};
     let { name, email, phone, cpf, birthDate, address } = req.body;
@@ -194,7 +198,9 @@ module.exports = userController = {
       });
 
   },
-  listPlans: (req,res) =>{
+
+//----------------------- Rotas individuais -----------------------//
+  listPlans: (req,res) => {
     plansServices.getAllPlans().then((plans)=>{
       res.json({
         success: true,
@@ -209,6 +215,24 @@ module.exports = userController = {
         });
       });
     }) 
+  },
+  listModules: (req, res) => {
+    modulesServices.getAll().then((modules) => {
+      res.json({
+        success: true,
+        info: modules
+      })
+    })
+    .catch((err) => {
+      console.log(err);
+      Sentry.captureException(err); // envia o stack do erro
+      res.json({
+        success: false,
+        message: err.message,
+      });
+    });
   }
+
+
 
 };
