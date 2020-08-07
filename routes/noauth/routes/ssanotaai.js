@@ -1,6 +1,6 @@
 var router = express.Router();
 const ssanotaaiController = require("../controllers/ssanotaaiController");
-const twilio = require("../controllers/twilioApi");
+const chatapi = require("../controllers/chat-api-send-msg");
 
 router.post(
   "/ssroutine",
@@ -15,7 +15,7 @@ router.get("/listplans", ssanotaaiController.listPlans);
 router.get("/listmodules", ssanotaaiController.listModules);
 router.get("/getsale/:saleId", ssanotaaiController.getSale);
 
-router.post("/twiliosend", twilio.sendMessage);
+router.post("/whatssend", chatapi.sendMsgToVendor);
 router.post(
   "/creditcardpayment/:id",
   ssanotaaiController.verifyPageBySale,
