@@ -1,5 +1,3 @@
-// Your Auth Token from www.twilio.com/console
-
 const axios = require("axios");
 
 module.exports = axiosRequests = {
