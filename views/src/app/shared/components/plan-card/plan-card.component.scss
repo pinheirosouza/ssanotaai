@@ -1,0 +1,77 @@
+.card-retangle {
+  width: 270px;
+  background: linear-gradient(130deg, rgba(160, 151, 244, 1) 0%, rgba(104, 149, 217, 1) 100%);
+  border-radius: 30px;
+  padding: 20px 20px;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px rgba(77, 77, 77, 0.933);
+}
+
+.title {
+  height: 10%;
+  color: white;
+
+  .icon {
+    padding-bottom: 15px;
+    font-size: 40px;
+  }
+
+  .text {
+    font-size: 27px;
+  }
+}
+
+.price-form {
+  margin-left: -21px;
+  width: auto;
+  // position: absolute;
+  padding: 25px 10px;
+  // height: 90px;
+  background-color: white;
+
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+  box-shadow: 0px 4px 8px #14243b;
+
+  .brl {
+    color: rgba(70, 180, 166, 1);
+    margin-left: 16px;
+    font-family: "arcon";
+    font-size: 30px;
+  }
+
+  .price {
+    color: rgba(13, 94, 110, 1);
+    font-family: "arcon";
+    font-size: 50px;
+  }
+
+  .cycle {
+    color: rgba(70, 180, 166, 1);
+    padding-top: 18px;
+    font-family: "arcon";
+    font-size: 15px;
+  }
+}
+
+.period {
+  color: white
+}
+
+.divider {
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 2px solid white;
+  width: 200px;
+}
+
+.select-button {
+
+  border-radius: 20px;
+  color: white;
+  border-color: white;
+}
+
+.select-button:hover {
+  background-color: rgb(97, 202, 171);
+}

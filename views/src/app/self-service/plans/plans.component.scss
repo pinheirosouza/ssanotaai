@@ -1,0 +1,39 @@
+.spacer {
+  flex: 1 1 auto
+}
+
+.toolbar {
+  background-color: #1b365f;
+  padding: 0 30px;
+  position: fixed;
+  top: 0;
+}
+
+.background {
+  background: linear-gradient(130deg, rgba(160, 151, 244, 1) 0%, rgba(104, 149, 217, 1) 100%);
+  background-attachment: fixed;
+  height: auto;
+  min-height: 100%;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 10px 50px;
+  width: 100%;
+  // height: 20px;
+  background-color: white;
+  color: black;
+  // text-align: center;
+  font-size: 18px;
+}
+
+.button {
+  font-family: arcon;
+  background-color: #5698fc;
+  color: white;
+  border-radius: 0px;
+  width: 120px;
+  line-height: 35px;
+}

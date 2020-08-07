@@ -1,3 +1,40 @@
-<div fxLayout="row" fxLayoutAlign="center center" fxFill>
-
+<div fxLayout="row" fxLayoutAlign="center center" fxFill class="background">
+  <div fxLayout="column" fxLayoutAlign="center center" class="center-retangle"
+    [ngStyle]="{'width' : (innerWidth < 1000) ? '100%' : '60%' ,'padding' : (innerWidth < 1000) ? '0px' : '20px' }">
+    <mat-horizontal-stepper class="stepper" labelPosition="bottom" (selectionChange)="selectionChange($event)" #stepper>
+      <ng-template matStepperIcon="edit">
+        <mat-icon>{{icon}}</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="home">
+        <mat-icon>home</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="voice_chat">
+        <mat-icon>voice_chat</mat-icon>
+      </ng-template>
+      <ng-template matStepperIcon="leave">
+        <mat-icon>
+          add_shopping_cart</mat-icon>
+      </ng-template>
+      <mat-step state="home">
+        <app-intro></app-intro>
+        <div fxLayout="row" fxLayoutAlign="end end">
+          <button mat-button class="button" matStepperNext>Prosseguir</button>
+        </div>
+      </mat-step>
+      <mat-step state="voice_chat">
+        <app-video></app-video>
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+          <button mat-button class="button" style="background-color: #adadad;" matStepperPrevious>Voltar</button>
+          <button mat-button class="button" (click)="checkVideoStatus(stepper)">Prosseguir</button>
+        </div>
+      </mat-step>
+      <mat-step state="leave">
+        <app-finish></app-finish>
+        <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+          <button mat-button class="button" style="background-color: #adadad;" matStepperPrevious>Voltar</button>
+          <button mat-button class="button" (click)="next()">Prosseguir</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
 </div>

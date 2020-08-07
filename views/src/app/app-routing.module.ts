@@ -1,8 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VideoDemoComponent } from './self-service/video-demo/video-demo.component';
+import { PlansComponent } from './self-service/plans/plans.component';
+import { ModulesComponent } from './self-service/modules/modules.component';
+import { LoadingPaymentComponent } from './self-service/loading-payment/loading-payment.component';
 
 const routes: Routes = [
+  {
+    path: 'plans',
+    component: PlansComponent,
+  },
+  {
+    path: 'modules',
+    component: ModulesComponent,
+  },
+  {
+    path: 'loading-payment',
+    component: LoadingPaymentComponent,
+  },
   {
     path: 'video-demo',
     component: VideoDemoComponent,

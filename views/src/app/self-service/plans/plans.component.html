@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" class="background">
+  <mat-toolbar class="toolbar">
+    <span style="color: white">Planos</span>
+    <div class="spacer"></div>
+    <img src="../../../assets/logo-anotaAI-horizontal-white.svg" style="height: 90%;">
+  </mat-toolbar>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="55px">
+    <plan-card></plan-card>
+    <plan-card></plan-card>
+    <plan-card></plan-card>
+    <plan-card></plan-card>
+  </div>
+
+  <div fxLayout="row" class="footer" fxLayoutGap="20px" fxLayoutAlign="start center">
+    <span>Plano Selecionado:</span>
+    <mat-chip-list>
+      <mat-chip
+        style=" padding: 12px 18px; color:white; background: linear-gradient(90deg, rgba(125,109,229,1) 0%, rgba(94,143,247,1) 100%);">
+        Anual
+      </mat-chip>
+    </mat-chip-list>
+    <div class="spacer"></div>
+    <button mat-button class="button" (click)="next()">Prosseguir</button>
+  </div>
+</div>
