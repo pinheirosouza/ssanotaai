@@ -139,14 +139,13 @@ module.exports = userController = {
 
     let {
       max_parcel,
-      value_plan,
-      membershipFee,
       discount,
       status,
       closer,
       comments,
       modulesArray,
     } = req.body;
+    let membershipFee = 50;
 
     for (let i = 0; i < modulesArray.length; i++) {
       totalModules.push(parseInt(modulesArray[i].value));
@@ -161,7 +160,7 @@ module.exports = userController = {
         let modulesSum = totalModules.reduce((a, b) => a + b, 0);
         let discountSum = totalDiscount.reduce((a, b) => a + b, 0);
         let saleTotal =
-          plan.price + membershipFee + modulesSum * plan.period - discountSum;
+          plan.price + membershipFee + (modulesSum * plan.period) - discountSum;
         salesServices
           .createSale(
             pageId,
@@ -169,7 +168,6 @@ module.exports = userController = {
             establishmentId,
             userId,
             max_parcel,
-            value_plan,
             membershipFee,
             discount,
             modulesArray,
