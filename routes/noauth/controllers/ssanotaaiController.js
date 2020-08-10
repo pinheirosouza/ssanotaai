@@ -17,10 +17,13 @@ module.exports = userController = {
   createUser: (req, res, next) => {
     req.register = {};
     let { name, email, phone, cpf, birthDate, address } = req.body;
+    console.log(name, email, phone, cpf, birthDate, address)
     let normalizeCpf = cpf.replace(/\D/g, "");
     //let normalizeCep = address.postalCode.replace(/\D/g, "");
     let normalizePhone = phone.replace(/\D/g, "");
     let normalizeBirth = moment(new Date(birthDate)).format("DD/MM/YYYY");
+
+    console.log(name, email, phone, cpf, birthDate, address, normalizePhone,normalizeBirth )
     userServices
       .createUser(
         name,
