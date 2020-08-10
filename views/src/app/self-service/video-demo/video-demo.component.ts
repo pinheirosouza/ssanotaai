@@ -54,6 +54,6 @@ export class VideoDemoComponent implements OnInit {
   }
 
   next() {
-    this.router.navigate(['plans']);
+    this.router.navigate(['intro-form']);
   }
 }

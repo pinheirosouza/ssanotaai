@@ -5,21 +5,21 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class ModulesService {
+export class PlansService {
   public url = environment.url;
-  public modules = [];
+  public plans = [];
 
   constructor(private http: HttpClient) {}
 
-  getModules() {
-    let url = this.url + '/noauth/ssanotaai/listmodules';
+  getPlans() {
+    let url = this.url + '/noauth/ssanotaai/listplans';
     this.http.get(url).subscribe((res: any) => {
-      this.modules = res.info;
-      for (let i = 0; i < this.modules.length; i++) {
-        this.modules[i].isChecked = false;
-        console.log(this.modules[i]);
+      this.plans = res.info;
+      for (let i = 0; i < this.plans.length; i++) {
+        this.plans[i].isChecked = false;
+        console.log(this.plans[i]);
       }
-      console.log(this.modules);
+      console.log(this.plans);
     });
   }
 }

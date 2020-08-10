@@ -1,22 +1,34 @@
 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" class="background">
   <mat-toolbar class="toolbar">
-    <span style="color: white">Planos</span>
+    <button mat-icon-button (click)="back()">
+      <mat-icon style="color: white">arrow_back</mat-icon>
+    </button>
+    <span style="color: white; margin-left:8px;">Planos</span>
     <div class="spacer"></div>
     <img src="../../../assets/logo-anotaAI-horizontal-white.svg" style="height: 90%;">
   </mat-toolbar>
-  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="55px">
-    <plan-card></plan-card>
-    <plan-card></plan-card>
-    <plan-card></plan-card>
-    <plan-card></plan-card>
+  <span style="font-size:48px; color: white; line-height: normal;">SELECIONE SEU PLANO</span>
+  <br>
+  <br>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="55px" *ngIf="selectedPlan">
+    <plan-card *ngFor="let p of plansService.plans"
+      [ngStyle]="{'-webkit-filter' : (p.isChecked) ? 'grayscale(0%)' : 'grayscale(100%)'}" [title]="p.title"
+      [price]="p.price" [period]="p.period" [mat_icon]="p.mat_icon" (click)="selectPlan(p)">
+    </plan-card>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="55px" *ngIf="!selectedPlan">
+    <plan-card *ngFor="let p of plansService.plans" [title]="p.title" [price]="p.price" [period]="p.period"
+      [mat_icon]="p.mat_icon" (click)="selectPlan(p)">
+    </plan-card>
   </div>
 
   <div fxLayout="row" class="footer" fxLayoutGap="20px" fxLayoutAlign="start center">
     <span>Plano Selecionado:</span>
-    <mat-chip-list>
+    <mat-chip-list *ngIf="selectedPlan">
       <mat-chip
         style=" padding: 12px 18px; color:white; background: linear-gradient(90deg, rgba(125,109,229,1) 0%, rgba(94,143,247,1) 100%);">
-        Anual
+        {{selectedPlan.title}}
       </mat-chip>
     </mat-chip-list>
     <div class="spacer"></div>

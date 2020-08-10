@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://integration-staging.herokuapp.com',
+  url: 'http://localhost:3000',
 };
 
 /*

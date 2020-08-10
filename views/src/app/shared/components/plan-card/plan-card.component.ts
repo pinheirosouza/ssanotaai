@@ -6,13 +6,16 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./plan-card.component.scss'],
 })
 export class PlanCardComponent implements OnInit {
+  public mensal;
   @Input('title') title: String;
   @Input('description') description: Array<String>;
   @Input('mat_icon') mat_icon: String;
-  @Input('price') price: Number;
-  @Input('period') period: Number;
+  @Input('price') price: number;
+  @Input('period') period: number;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.mensal = (this.price / this.period).toFixed(2);
+  }
 }

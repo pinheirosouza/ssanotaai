@@ -1,27 +1,36 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="background" style="padding: 80px;">
   <br>
-  <span style="font-size:32px; color: white;">SELECIONE SEUS MÓDULOS</span>
+  <span style="font-size:48px; color: white; line-height: normal;">ESCOLHA SEUS MÓDULOS</span>
   <br>
   <br>
-  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px">
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0px"
       style="height: auto; background-color: white; box-shadow: 3px 7px 7px #505050;"
-      *ngFor="let m of modulesService.modules">
-      <img [src]="m.ssimage" style="width: 400px;">
-      <div fxLayout="column" fxLayoutAlign="center center" style="width: 300px; text-align: center; padding: 20px "
-        fxLayoutGap="20px">
-        <span style="font-size: large;">{{m.title}}</span>
-        <span>{{m.description}}</span>
-        <button mat-button class="button">Selecionar</button>
-      </div>
-    </div>
+      *ngFor="let m of modulesService.modules; let i = index">
 
+      <img [src]="m.ssimage" style="width: 400px;"
+        [ngStyle]="{'-webkit-filter' : (m.isChecked) ? 'grayscale(0%)' : 'grayscale(100%)'}" *ngIf="i%2 == 1">
+      <div fxLayout="column" fxLayoutAlign="center center" style="width: 300px; text-align: center; padding: 20px "
+        fxLayoutGap="10px">
+        <span style="font-size: 25px; line-height: normal;">{{m.title}}</span>
+        <span>{{m.description}}</span>
+        <span style="font-size:38px; line-height:normal">R${{m.base_price}}<span style="font-size: medium;">p/
+            mês</span></span>
+        <button mat-button class="button" [ngStyle]="{'background-color' : (m.isChecked) ? 'green' : '#5698fc'}"
+          (click)="moduleCheck(m)">{{(m.isChecked) ? 'Selecionado' : 'Selecionar'}}</button>
+      </div>
+      <img [src]="m.ssimage" style="width: 400px;"
+        [ngStyle]="{'-webkit-filter' : (m.isChecked) ? 'grayscale(0%)' : 'grayscale(100%)'}" *ngIf="i%2 != 1">
+    </div>
   </div>
   <br>
   <br>
   <button mat-button class="button" (click)="next()">Prosseguir</button>
   <mat-toolbar class="toolbar">
-    <span style="color: white">Módulos</span>
+    <button mat-icon-button (click)="back()">
+      <mat-icon style="color: white">arrow_back</mat-icon>
+    </button>
+    <span style="color: white; margin-left:8px;">Módulos</span>
     <div class="spacer"></div>
     <img src="../../../assets/logo-anotaAI-horizontal-white.svg" style="height: 90%;">
   </mat-toolbar>

@@ -1,0 +1,89 @@
+.div-alert-title {
+  background: white;
+}
+
+.div-alert-content {
+  background: #003f63;
+}
+
+.img {
+  width: 80px;
+  margin-right: 5px;
+}
+
+.divider {
+  border-left: 1px solid #003f63;
+  background: #003f63;
+  width: 1px;
+  height: 80px;
+  right: 250px;
+  top: 10px;
+}
+
+.alert-title {
+  color: #003f63;
+  margin-left: 20px;
+  font-size: 26px;
+  white-space: pre-line;
+}
+
+.form-div {
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.alert-form {
+  min-width: 150px;
+  max-width: 300px;
+  width: 100%;
+
+  .alert-field {
+    width: 100%;
+    font-size: 150%;
+    color: white
+  }
+
+  .alert-label {
+    color: white;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    /*change color of underline*/
+    background-color: white !important;
+  }
+
+  ::ng-deep .mat-form-field.mat-focused {
+    .mat-form-field-label {
+      color: #3399ff;
+    }
+
+    .mat-form-field-ripple {
+      background-color: #3399ff;
+    }
+
+    .mat-form-field-required-marker {
+      color: #3399ff;
+    }
+  }
+}
+
+.button {
+  font-family: arcon;
+  background-color: #5698fc;
+  color: white;
+  border-radius: 0px;
+  width: 120px;
+  line-height: 35px;
+}
+
+::ng-deep .mat-dialog-actions {
+  min-height: 0px !important;
+  padding: 0px !important;
+}
+
+.description {
+  font-size: 20px;
+  color: white;
+  white-space: pre-line;
+}

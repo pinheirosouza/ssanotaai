@@ -4,11 +4,21 @@ import { VideoDemoComponent } from './self-service/video-demo/video-demo.compone
 import { PlansComponent } from './self-service/plans/plans.component';
 import { ModulesComponent } from './self-service/modules/modules.component';
 import { LoadingPaymentComponent } from './self-service/loading-payment/loading-payment.component';
+import { FormComponent } from './self-service/form/form.component';
+import { IntroFormComponent } from './self-service/intro-form/intro-form.component';
 
 const routes: Routes = [
   {
     path: 'plans',
     component: PlansComponent,
+  },
+  {
+    path: 'form',
+    component: FormComponent,
+  },
+  {
+    path: 'intro-form',
+    component: IntroFormComponent,
   },
   {
     path: 'modules',

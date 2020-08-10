@@ -19,12 +19,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { PlansComponent } from './self-service/plans/plans.component';
 import { PlanCardComponent } from './shared/components/plan-card/plan-card.component';
 import { ModulesComponent } from './self-service/modules/modules.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingPaymentComponent } from './self-service/loading-payment/loading-payment.component';
+import { FormComponent } from './self-service/form/form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { IntroFormComponent } from './self-service/intro-form/intro-form.component';
+import { AlertComponent } from './shared/dialogs/alert/alert.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { SaleValidators } from './shared/validators/sale';
 
 @NgModule({
   declarations: [
@@ -37,8 +46,14 @@ import { LoadingPaymentComponent } from './self-service/loading-payment/loading-
     PlanCardComponent,
     ModulesComponent,
     LoadingPaymentComponent,
+    FormComponent,
+    IntroFormComponent,
+    AlertComponent,
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -46,6 +61,7 @@ import { LoadingPaymentComponent } from './self-service/loading-payment/loading-
     MatStepperModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatInputModule,
     FlexLayoutModule,
     MatIconModule,
     MatSnackBarModule,
@@ -54,6 +70,8 @@ import { LoadingPaymentComponent } from './self-service/loading-payment/loading-
     MatGridListModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     {
@@ -61,6 +79,7 @@ import { LoadingPaymentComponent } from './self-service/loading-payment/loading-
       useValue: { displayDefaultIndicatorType: false },
     },
     MatStepper,
+    SaleValidators,
   ],
   bootstrap: [AppComponent],
 })
