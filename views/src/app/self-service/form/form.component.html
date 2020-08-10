@@ -61,7 +61,7 @@
         <mat-error *ngIf="saleVal.postalCodeFormControl.invalid">{{saleVal.getPostalCodeErrorMessage()}}
         </mat-error>
       </mat-form-field>
-      <button mat-icon-button style="color: #003f63">
+      <button mat-icon-button style="color: #003f63" (click)="getAddress()">
         <mat-icon>search</mat-icon>
       </button>
     </div>

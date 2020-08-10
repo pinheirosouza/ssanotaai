@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SalesService } from 'src/app/shared/_services/sales/sales.service';
 import { SaleValidators } from 'src/app/shared/validators/sale';
 import { AlertService } from 'src/app/shared/dialogs/alert/alert.service';
+import { GetAddressByCepService } from 'src/app/shared/_services/getAddressByCep/get-address-by-cep.service';
 
 @Component({
   selector: 'app-form',
@@ -14,12 +15,28 @@ export class FormComponent implements OnInit {
     public router: Router,
     public salesService: SalesService,
     public saleVal: SaleValidators,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private getAddressService: GetAddressByCepService
   ) {
     this.salesService.sale.address = {};
   }
 
   ngOnInit(): void {}
+
+  getAddress() {
+    this.getAddressService
+      .getAddressByCep(this.salesService.sale.address.postalCode)
+      .then((res: any) => {
+        res.json().then((res) => {
+          this.salesService.sale.address.street = res.logradouro;
+          this.salesService.sale.address.city = res.localidade;
+          this.salesService.sale.address.district = res.bairro;
+          this.salesService.sale.address.state = this.getAddressService.ufToState(
+            res.uf
+          );
+        });
+      });
+  }
 
   back() {
     this.router.navigate(['video-demo']);
