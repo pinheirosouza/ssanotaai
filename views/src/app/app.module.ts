@@ -24,7 +24,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { PlansComponent } from './self-service/plans/plans.component';
 import { PlanCardComponent } from './shared/components/plan-card/plan-card.component';
 import { ModulesComponent } from './self-service/modules/modules.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingPaymentComponent } from './self-service/loading-payment/loading-payment.component';
 import { FormComponent } from './self-service/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,6 +34,12 @@ import { AlertComponent } from './shared/dialogs/alert/alert.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { SaleValidators } from './shared/validators/sale';
+import {
+  HTTPListener,
+  HTTPStatus,
+} from './shared/_services/interceptor/interceptor.service';
+const RxJS_Services = [HTTPListener, HTTPStatus];
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +55,7 @@ import { SaleValidators } from './shared/validators/sale';
     FormComponent,
     IntroFormComponent,
     AlertComponent,
+    LoaderComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -78,6 +85,13 @@ import { SaleValidators } from './shared/validators/sale';
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false },
     },
+    RxJS_Services,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HTTPListener,
+      multi: true,
+    },
+
     MatStepper,
     SaleValidators,
   ],

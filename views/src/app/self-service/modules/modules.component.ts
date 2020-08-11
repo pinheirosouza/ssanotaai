@@ -36,8 +36,8 @@ export class ModulesComponent implements OnInit {
     for (let i = 0; i < this.modulesService.modules.length; i++) {
       if (this.modulesService.modules[i].isChecked) {
         modulesList.push({
-          id: this.modulesService.modules[i]._id,
-          value: this.modulesService.modules[i].value,
+          module: this.modulesService.modules[i]._id,
+          value: this.modulesService.modules[i].base_price,
         });
       }
     }

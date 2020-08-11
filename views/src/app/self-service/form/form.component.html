@@ -47,6 +47,13 @@
       </mat-form-field>
     </div>
     <mat-form-field class="field">
+      <mat-label class="label">Email</mat-label>
+      <input matInput class="field-line" name="email" [(ngModel)]="salesService.sale.email"
+        [formControl]="saleVal.emailFormControl">
+      <mat-error *ngIf="saleVal.emailFormControl.invalid">{{saleVal.getEmailErrorMessage()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
       <mat-label class="label">Telefone</mat-label>
       <input matInput class="field-line" name="phone" [(ngModel)]="salesService.sale.phone"
         [formControl]="saleVal.phoneFormControl" mask="00 00000-0000||00 0000-0000">
