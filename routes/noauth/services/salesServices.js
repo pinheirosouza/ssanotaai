@@ -33,7 +33,6 @@ module.exports = salesServices = {
     closer_name
   ) => {
     return new Promise((resolve, reject) => {
-      console.log("chamou aqui"+user)
       if (page) {
         const newSale = new integratedSalesModel({
           page,
