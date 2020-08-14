@@ -1,5 +1,5 @@
 module.exports = {
-  urlBasePayment: "http://localhost:3000",
+  urlBasePayment: " https://staging-payment-anotaai.herokuapp.com",
   safe2pay: {
     //sandbox
     token: "81AAB3B4470545A8BCF5635B78F89209",
