@@ -17,34 +17,40 @@ module.exports = userController = {
   createUser: (req, res, next) => {
     req.register = {};
     let { name, email, phone, cpf, birthDate, address } = req.body;
-    console.log(name, email, phone, cpf, birthDate, address)
+
     let normalizeCpf = cpf.replace(/\D/g, "");
     //let normalizeCep = address.postalCode.replace(/\D/g, "");
     let normalizePhone = phone.replace(/\D/g, "");
     let normalizeBirth = moment(new Date(birthDate)).format("DD/MM/YYYY");
 
-    console.log(name, email, phone, cpf, birthDate, address, normalizePhone,normalizeBirth )
-    userServices
-      .createUser(
-        name,
-        email,
-        normalizePhone,
-        normalizeCpf,
-        normalizeBirth,
-        address
-      )
-      .then((user) => {
-        req.register.user = user;
-        next();
-      })
-      .catch((err) => {
-        console.log(err);
-        Sentry.captureException(err); // envia o stack do erro
-        res.json({
-          success: false,
-          message: err,
+    if (normalizeCpf.length == 11) {
+      userServices
+        .createUser(
+          name,
+          email,
+          normalizePhone,
+          normalizeCpf,
+          normalizeBirth,
+          address
+        )
+        .then((user) => {
+          req.register.user = user;
+          next();
+        })
+        .catch((err) => {
+          console.log(err);
+          Sentry.captureException(err); // envia o stack do erro
+          res.json({
+            success: false,
+            message: err,
+          });
         });
+    } else {
+      res.json({
+        success: false,
+        message: "CPF inválido",
       });
+    }
   },
   createPage: (req, res, next) => {
     const pageName = req.body.pageName;
@@ -148,7 +154,7 @@ module.exports = userController = {
       comments,
       modulesArray,
     } = req.body;
-    let membershipFee = 50;
+    let membershipFee = 200;
 
     for (let i = 0; i < modulesArray.length; i++) {
       totalModules.push(parseInt(modulesArray[i].value));
