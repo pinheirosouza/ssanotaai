@@ -1,2 +1,2 @@
 
-api: node app.js
+web: gunicorn node app.js
