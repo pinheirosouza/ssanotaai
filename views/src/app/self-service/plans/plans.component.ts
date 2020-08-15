@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlansService } from '../../shared/_services/plans/plans.service';
 import { SalesService } from '../../shared/_services/sales/sales.service';
@@ -11,6 +11,7 @@ import { AlertService } from '../../shared/dialogs/alert/alert.service';
 })
 export class PlansComponent implements OnInit {
   public selectedPlan;
+  public innerWidth;
 
   constructor(
     public router: Router,
@@ -21,7 +22,22 @@ export class PlansComponent implements OnInit {
     plansService.getPlans();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
+
+  layoutStyle() {
+    if (innerWidth > 1000) {
+      return 'row';
+    } else {
+      return 'column';
+    }
+  }
 
   selectPlan(p) {
     console.log(p);
@@ -33,7 +49,7 @@ export class PlansComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['form']);
+    this.router.navigate(['video-demo']);
   }
   next() {
     if (this.selectedPlan) {

@@ -1,6 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="center center" fxFill class="background">
   <div fxLayout="column" fxLayoutAlign="center center" class="center-retangle"
     [ngStyle]="{'width' : (innerWidth < 1000) ? '100%' : '60%' ,'padding' : (innerWidth < 1000) ? '0px' : '20px' }">
+    
     <mat-horizontal-stepper class="stepper" labelPosition="bottom" (selectionChange)="selectionChange($event)" #stepper>
       <ng-template matStepperIcon="edit">
         <mat-icon>{{icon}}</mat-icon>

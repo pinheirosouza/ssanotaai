@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ModulesService } from 'src/app/shared/_services/modules/modules.service';
 import { Router } from '@angular/router';
 import { SalesService } from 'src/app/shared/_services/sales/sales.service';
@@ -9,6 +9,7 @@ import { SalesService } from 'src/app/shared/_services/sales/sales.service';
   styleUrls: ['./modules.component.scss'],
 })
 export class ModulesComponent implements OnInit {
+  public innerWidth;
   constructor(
     public modulesService: ModulesService,
     public salesService: SalesService,
@@ -16,8 +17,22 @@ export class ModulesComponent implements OnInit {
   ) {
     this.modulesService.getModules();
   }
+  ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+  }
 
-  ngOnInit(): void {}
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
+
+  layoutStyle() {
+    if (innerWidth > 1000) {
+      return 'row';
+    } else {
+      return 'column';
+    }
+  }
 
   moduleCheck(m) {
     if (m.isChecked) {
@@ -32,22 +47,6 @@ export class ModulesComponent implements OnInit {
   }
 
   next() {
-    let modulesList = [];
-    for (let i = 0; i < this.modulesService.modules.length; i++) {
-      if (this.modulesService.modules[i].isChecked) {
-        modulesList.push({
-          module: this.modulesService.modules[i]._id,
-          value: this.modulesService.modules[i].base_price,
-        });
-      }
-    }
-    this.salesService.sale.modulesArray = modulesList;
-    this.salesService.sale.max_parcel = 12;
-    this.salesService.sale.membershipFee = 200;
-    console.log('Venda final', this.salesService.sale);
-    this.salesService.createSale().subscribe((res) => {
-      console.log(res);
-    });
-    this.router.navigate(['loading-payment']);
+    this.router.navigate(['intro-form']);
   }
 }

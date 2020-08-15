@@ -1,6 +1,42 @@
-<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
-  <video (timeupdate)="videoService.setCurrentTime($event)" width="100%" height="auto" controls>
+<div [fxLayout]="layoutStyle()" fxLayoutAlign="center center">
+  <video class="video" (timeupdate)="videoService.setCurrentTime($event)"
+    [ngStyle]="{'width': (innerWidth>1000) ? '70%': '100%'}" height="auto" controls style="-webkit-box-shadow: 10px 0px 6px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 0px 6px -5px rgba(0,0,0,0.75);
+    box-shadow: 10px 0px 6px -5px rgba(0,0,0,0.75);">
     <source src="../../../../assets/videos/demo_1.mp4" type="video/mp4">
   </video>
+  <div class="video-sections" [ngStyle]="{'width': (innerWidth>1000) ? 'auto': '100%'}" fxLayout="column"
+    fxLayoutAlign="center start" fxLayoutGap="5px">
+    <div style="width: 100%" (click)="jumpVideoTo(0)">
+      <span class="video-button">Conheça o Anota AI</span>
+    </div>
+    <div class="divider"></div>
+    <div style="width: 100%" (click)="jumpVideoTo(108)">
+      <span class="video-button">Atendente Virtual</span>
+    </div>
+    <div class="divider"></div>
+    <div style="width: 100%" (click)="jumpVideoTo(175)">
+      <span class="video-button">Cardápio Digital</span>
+    </div>
+    <div class="divider"></div>
+    <div style="width: 100%" (click)="jumpVideoTo(207)">
+      <span class="video-button">Painel Administrativo</span>
+    </div>
+    <div class="divider"></div>
+    <div style="width: 100%" (click)="jumpVideoTo(285)">
+      <span class="video-button">Cupom</span>
+    </div>
+    <div class="divider"></div>
+    <div style="width: 100%" (click)="jumpVideoTo(315)">
+      <span class="video-button">Pesquisa de Satisfação</span></div>
+    <div class="divider"></div>
+    <div style="width: 100%" (click)="jumpVideoTo(349)">
+      <span class="video-button">Fidelidade</span>
+    </div>
+    <div class="divider"></div>
+    <div style="width: 100%" (click)="jumpVideoTo(372)">
+      <span class="video-button">Contratação</span>
+    </div>
+  </div>
 </div>
 <br>

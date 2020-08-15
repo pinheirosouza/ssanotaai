@@ -58,7 +58,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     LoaderComponent,
   ],
   imports: [
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' }),
     FormsModule,
     CommonModule,
     BrowserModule,

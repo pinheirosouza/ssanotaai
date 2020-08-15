@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { SalesService } from 'src/app/shared/_services/sales/sales.service';
 import { SaleValidators } from 'src/app/shared/validators/sale';
 import { AlertService } from 'src/app/shared/dialogs/alert/alert.service';
 import { GetAddressByCepService } from 'src/app/shared/_services/getAddressByCep/get-address-by-cep.service';
+import { ModulesService } from 'src/app/shared/_services/modules/modules.service';
 
 @Component({
   selector: 'app-form',
@@ -11,17 +12,35 @@ import { GetAddressByCepService } from 'src/app/shared/_services/getAddressByCep
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+  public innerWidth;
+
   constructor(
     public router: Router,
     public salesService: SalesService,
     public saleVal: SaleValidators,
     private alertService: AlertService,
-    private getAddressService: GetAddressByCepService
+    private getAddressService: GetAddressByCepService,
+    private modulesService: ModulesService
   ) {
     this.salesService.sale.address = {};
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
+
+  layoutStyle() {
+    if (innerWidth > 1000) {
+      return 'row';
+    } else {
+      return 'column';
+    }
+  }
 
   getAddress() {
     this.getAddressService
@@ -39,7 +58,7 @@ export class FormComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['video-demo']);
+    this.router.navigate(['modules']);
   }
   next() {
     if (
@@ -58,8 +77,32 @@ export class FormComponent implements OnInit {
     ) {
       this.alertService.showAlert('Erro', 'Complete os campos corretamente');
     } else {
+      let modulesList = [];
+      for (let i = 0; i < this.modulesService.modules.length; i++) {
+        if (this.modulesService.modules[i].isChecked) {
+          modulesList.push({
+            module: this.modulesService.modules[i]._id,
+            value: this.modulesService.modules[i].base_price,
+          });
+        }
+      }
+      this.salesService.sale.modulesArray = modulesList;
+      this.salesService.sale.max_parcel = 12;
+      this.salesService.sale.membershipFee = 200;
+      console.log('Venda final', this.salesService.sale);
+      this.salesService.createSale().subscribe((res: any) => {
+        if (res.success) {
+          window.open(res.info.link, '_self');
+          window.open(
+            'https://pagamento.anota.ai/payment/5f3702fe068acd002493ccc6',
+            '_self'
+          );
+        } else {
+          this.alertService.showAlert('Erro', res.message);
+        }
+      });
+      this.router.navigate(['loading-payment']);
       console.log(this.salesService.sale);
-      this.router.navigate(['plans']);
     }
   }
 }
