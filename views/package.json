@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "pm2-runtime start ecosystem.config.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -31,7 +31,8 @@
     "zone.js": "~0.10.3",
     "@angular/cli": "~10.0.0",
     "@angular/compiler-cli": "~10.0.0",
-    "typescript": "~3.9.5"
+    "typescript": "~3.9.5",
+    "pm2": "^4.4.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.0",
