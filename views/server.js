@@ -8,9 +8,12 @@ console.log("Tentando rodar esa parada na porta ", port)
 
 app.use(express.static(__dirname + '/dist/ssanotaai'));
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/dist/ssanotaai/index.html')));
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname + '/dist/ssanotaai/index.html')));
 
 
-const server = http.createServer(app);
+const server = app.listen(port, function () {
+  console.log('servidor ligado porta ' + app.get('port'));
+});
+server.timeout = 45000;
 
-server.listen(port, () => console.log(`App running on: http://localhost:${port}`));
+// server.listen(port, () => console.log(`App running on: http://localhost:${port}`));
