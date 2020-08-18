@@ -1,1 +1,1 @@
-web: pm2-runtime start views/ecosystem.config.js
+web: node views/server.js
