@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://staging-ssanotaai-api.herokuapp.com',
+  url: 'https://staging-ssanotaai-api.herokuapp.com',
 };
 
 /*
