@@ -10,9 +10,7 @@ const safe2PayService = require("../services/safe2pay-api-service");
 
 const SAFE2PAY_IS_SANDBOX = process.env.ENV_BASE != "production";
 
-const {
-  isValidObjectId
-} = require("mongoose");
+const { isValidObjectId } = require("mongoose");
 
 module.exports = userController = {
   //--------------------- Rotina de vendas -------------------------//
@@ -24,6 +22,7 @@ module.exports = userController = {
     //let normalizeCep = address.postalCode.replace(/\D/g, "");
     let normalizePhone = phone.replace(/\D/g, "");
     let normalizeBirth = moment(new Date(birthDate)).format("DD/MM/YYYY");
+    console.log(normalizeCpf);
 
     if (normalizeCpf.length == 11) {
       userServices
@@ -161,8 +160,17 @@ module.exports = userController = {
     for (let i = 0; i < modulesArray.length; i++) {
       totalModules.push(parseFloat(modulesArray[i].value));
     }
-    for (let i = 0; i < discount.length; i++) {
-      totalDiscount.push(parseFloat(discount[i].value));
+    if (!discount) {
+      discount = [
+        {
+          value: 0,
+          description: null,
+        },
+      ];
+    } else {
+      for (let i = 0; i < discount.length; i++) {
+        totalDiscount.push(parseFloat(discount[i].value));
+      }
     }
 
     plansServices
@@ -171,7 +179,7 @@ module.exports = userController = {
         let modulesSum = totalModules.reduce((a, b) => a + b, 0);
         let discountSum = totalDiscount.reduce((a, b) => a + b, 0);
         let saleTotal =
-          plan.price + membershipFee + (modulesSum * plan.period) - discountSum;
+          plan.price + membershipFee + modulesSum * plan.period - discountSum;
         salesServices
           .createSale(
             pageId,
@@ -341,12 +349,14 @@ module.exports = userController = {
               CountryName: req.body.address.countryName,
             },
           },
-          Products: [{
-            Code: "001",
-            Description: "Mensalidade Anota AI",
-            UnitPrice: sale.total,
-            Quantity: 1,
-          }, ],
+          Products: [
+            {
+              Code: "001",
+              Description: "Mensalidade Anota AI",
+              UnitPrice: sale.total,
+              Quantity: 1,
+            },
+          ],
           PaymentObject: {
             Holder: req.body.payment_method.cardName,
             CardNumber: req.body.payment_method.cardNumber,
@@ -398,7 +408,8 @@ module.exports = userController = {
               } else {
                 res.json({
                   success: false,
-                  message: parsedData.ResponseDetail.Message +
+                  message:
+                    parsedData.ResponseDetail.Message +
                     " - " +
                     parsedData.ResponseDetail.Description,
                 });
@@ -457,15 +468,18 @@ module.exports = userController = {
               CountryName: req.body.address.countryName,
             },
           },
-          Products: [{
-            Code: "001",
-            Description: "Mensalidade Anota AI",
-            UnitPrice: sale.total,
-            Quantity: 1,
-          }, ],
+          Products: [
+            {
+              Code: "001",
+              Description: "Mensalidade Anota AI",
+              UnitPrice: sale.total,
+              Quantity: 1,
+            },
+          ],
           PaymentObject: {
             DueDate: moment().add(3, "days").format("DD/MM/YYYY"),
-            Instruction: "Serviço Anota AI informa, seu boleto deve ser pago antes do vencimento.",
+            Instruction:
+              "Serviço Anota AI informa, seu boleto deve ser pago antes do vencimento.",
             Message: [
               "Boleto válido até a data de vencimento.",
               "Não aceitar o pagamento do boleto após o vencimento.",
