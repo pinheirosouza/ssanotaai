@@ -22,7 +22,6 @@ module.exports = userController = {
     //let normalizeCep = address.postalCode.replace(/\D/g, "");
     let normalizePhone = phone.replace(/\D/g, "");
     let normalizeBirth = moment(new Date(birthDate)).format("DD/MM/YYYY");
-    console.log(normalizeCpf);
 
     if (normalizeCpf.length == 11) {
       userServices
@@ -179,7 +178,8 @@ module.exports = userController = {
         let modulesSum = totalModules.reduce((a, b) => a + b, 0);
         let discountSum = totalDiscount.reduce((a, b) => a + b, 0);
         let saleTotal =
-          plan.price + membershipFee + modulesSum * plan.period - discountSum;
+          plan.price + membershipFee + (modulesSum * plan.period) - discountSum;
+
         salesServices
           .createSale(
             pageId,
