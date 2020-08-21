@@ -18,39 +18,41 @@ module.exports = userController = {
   //--------------------- Rotina de vendas -------------------------//
   createUser: (req, res, next) => {
     req.register = {};
-    let {
-      name,
-      email,
-      phone,
-      cpf,
-      birthDate,
-      address
-    } = req.body;
+    let { name, email, phone, cpf, birthDate, address } = req.body;
+
     let normalizeCpf = cpf.replace(/\D/g, "");
     //let normalizeCep = address.postalCode.replace(/\D/g, "");
     let normalizePhone = phone.replace(/\D/g, "");
     let normalizeBirth = moment(new Date(birthDate)).format("DD/MM/YYYY");
-    userServices
-      .createUser(
-        name,
-        email,
-        normalizePhone,
-        normalizeCpf,
-        normalizeBirth,
-        address
-      )
-      .then((user) => {
-        req.register.user = user;
-        next();
-      })
-      .catch((err) => {
-        console.log(err);
-        Sentry.captureException(err); // envia o stack do erro
-        res.json({
-          success: false,
-          message: err,
+
+    if (normalizeCpf.length == 11) {
+      userServices
+        .createUser(
+          name,
+          email,
+          normalizePhone,
+          normalizeCpf,
+          normalizeBirth,
+          address
+        )
+        .then((user) => {
+          req.register.user = user;
+          next();
+        })
+        .catch((err) => {
+          console.log(err);
+          Sentry.captureException(err); // envia o stack do erro
+          res.json({
+            success: false,
+            message: err,
+          });
         });
+    } else {
+      res.json({
+        success: false,
+        message: "CPF inválido",
       });
+    }
   },
   createPage: (req, res, next) => {
     const pageName = req.body.pageName;
@@ -154,7 +156,7 @@ module.exports = userController = {
       comments,
       modulesArray,
     } = req.body;
-    let membershipFee = 50;
+    let membershipFee = 200;
 
     for (let i = 0; i < modulesArray.length; i++) {
       totalModules.push(parseFloat(modulesArray[i].value));
