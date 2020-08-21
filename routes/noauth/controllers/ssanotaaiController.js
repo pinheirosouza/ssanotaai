@@ -22,7 +22,6 @@ module.exports = userController = {
     //let normalizeCep = address.postalCode.replace(/\D/g, "");
     let normalizePhone = phone.replace(/\D/g, "");
     let normalizeBirth = moment(new Date(birthDate)).format("DD/MM/YYYY");
-    console.log(normalizeCpf);
 
     if (normalizeCpf.length == 11) {
       userServices
