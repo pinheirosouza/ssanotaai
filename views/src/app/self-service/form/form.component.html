@@ -18,8 +18,8 @@
     </mat-form-field>
     <mat-form-field class="field">
       <mat-label class="label">CPF ou CNPJ</mat-label>
-      <input matInput class="field-line" name="cpf_cnpj" [(ngModel)]="salesService.sale.cpf_cnpj" mask="CPF_CNPJ"
-        [formControl]="saleVal.cpfCnpjFormControl">
+      <input matInput class="field-line" name="cpf_cnpj" [(ngModel)]="salesService.sale.cpf_cnpj"
+        mask="000.000.000-00||00.000.000/0000-00" [formControl]="saleVal.cpfCnpjFormControl">
       <mat-error *ngIf="saleVal.cpfCnpjFormControl.invalid">{{saleVal.getCpfCnpjErrorMessage()}}
       </mat-error>
     </mat-form-field>
