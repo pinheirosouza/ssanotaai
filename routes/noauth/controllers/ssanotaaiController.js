@@ -178,7 +178,8 @@ module.exports = userController = {
         let modulesSum = totalModules.reduce((a, b) => a + b, 0);
         let discountSum = totalDiscount.reduce((a, b) => a + b, 0);
         let saleTotal =
-          plan.price + membershipFee + modulesSum * plan.period - discountSum;
+          plan.price + membershipFee + (modulesSum * plan.period) - discountSum;
+
         salesServices
           .createSale(
             pageId,
