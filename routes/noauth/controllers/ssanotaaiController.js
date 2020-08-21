@@ -157,10 +157,10 @@ module.exports = userController = {
     let membershipFee = 50;
 
     for (let i = 0; i < modulesArray.length; i++) {
-      totalModules.push(parseInt(modulesArray[i].value));
+      totalModules.push(parseFloat(modulesArray[i].value));
     }
     for (let i = 0; i < discount.length; i++) {
-      totalDiscount.push(parseInt(discount[i].value));
+      totalDiscount.push(parseFloat(discount[i].value));
     }
 
     plansServices

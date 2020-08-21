@@ -53,6 +53,15 @@ export class VideoDemoComponent implements OnInit {
     }
   }
 
+  openWhatsApp() {
+    let number = 5521974312900;
+    let message =
+      'Olá. Acabo de assistir a demonstração e tenho dúvidas sobre o Anota AI. Poderia me ajudar?';
+    window.open(
+      `https://api.whatsapp.com/send?phone=${number}&text=${message}`
+    );
+  }
+
   next() {
     this.router.navigate(['plans']);
   }
