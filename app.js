@@ -1,12 +1,14 @@
 express = require("express");
 mongoose = require("mongoose");
 mongoose.Promise = require("q").Promise;
+config = require("./config/config.js");
 moment = require("moment-timezone");
 moment.tz.setDefault("America/Sao_Paulo");
 socketIO = require("socket.io");
 ObjectIDForModel = mongoose.Schema.Types.ObjectId;
 ObjectId = mongoose.Types.ObjectId;
 mongoose.Promise = require("q").Promise;
+mongoosePaginate = require("mongoose-paginate");
 jwt = require("jsonwebtoken");
 Promise = require("bluebird");
 multipart = require("connect-multiparty");
@@ -14,7 +16,7 @@ multipartMiddleware = multipart({
   maxFilesSize: 1024 * 1024,
 });
 Sentry = require("@sentry/node");
-
+urlBasePayment = process.env.URLBASE_COMERCIAL || config.urlBasePayment;
 const bodyParser = require("body-parser");
 const database = require("./config/db");
 

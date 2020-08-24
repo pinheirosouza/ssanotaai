@@ -1,0 +1,123 @@
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15px" class="main">
+  <mat-toolbar class="toolbar">
+    <button mat-icon-button (click)="back()">
+      <mat-icon style="color: white">arrow_back</mat-icon>
+    </button>
+    <span style="color: white; margin-left:8px;">Cadastro</span>
+    <div class="spacer"></div>
+    <img src="../../../assets/logo-anotaAI-horizontal-white.svg" style="height: 90%;">
+  </mat-toolbar>
+
+  <div class="form">
+    <mat-form-field class="field">
+      <mat-label class="label">Nome do Estabelecimento</mat-label>
+      <input matInput class="field-line" name="name" [(ngModel)]="salesService.sale.pageName"
+        [formControl]="saleVal.pageNameFormControl">
+      <mat-error *ngIf="saleVal.pageNameFormControl.invalid">{{saleVal.getPageNameErrorMessage()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label class="label">CPF ou CNPJ</mat-label>
+      <input matInput class="field-line" name="cpf_cnpj" [(ngModel)]="salesService.sale.cpf_cnpj"
+        mask="000.000.000-00||00.000.000/0000-00" [formControl]="saleVal.cpfCnpjFormControl">
+      <mat-error *ngIf="saleVal.cpfCnpjFormControl.invalid">{{saleVal.getCpfCnpjErrorMessage()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label class="label">Nome do Responsável</mat-label>
+      <input matInput class="field-line" name="name" [(ngModel)]="salesService.sale.name"
+        [formControl]="saleVal.nameFormControl">
+      <mat-error *ngIf="saleVal.nameFormControl.invalid">{{saleVal.getNameErrorMessage()}}
+      </mat-error>
+    </mat-form-field>
+    <div [fxLayout]="layoutStyle()" fxLayoutGap="25px">
+      <mat-form-field class="field">
+        <mat-label class="label">CPF do Responsável</mat-label>
+        <input matInput class="field-line" name="cpf" [(ngModel)]="salesService.sale.cpf" mask="000.000.000-00"
+          [formControl]="saleVal.cpfFormControl">
+        <mat-error *ngIf="saleVal.cpfFormControl.invalid">{{saleVal.getCpfErrorMessage()}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="field">
+        <mat-label class="label">Data de Nascimento</mat-label>
+        <input matInput class="field-line" type="date" name="birthDate" [(ngModel)]="salesService.sale.birthDate"
+          [formControl]="saleVal.birthDateFormControl">
+        <mat-error *ngIf="saleVal.birthDateFormControl.invalid">{{saleVal.getBirthDateErrorMessage()}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field class="field">
+      <mat-label class="label">Email</mat-label>
+      <input matInput class="field-line" name="email" [(ngModel)]="salesService.sale.email"
+        [formControl]="saleVal.emailFormControl">
+      <mat-error *ngIf="saleVal.emailFormControl.invalid">{{saleVal.getEmailErrorMessage()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label class="label">Telefone</mat-label>
+      <input matInput class="field-line" name="phone" [(ngModel)]="salesService.sale.phone"
+        [formControl]="saleVal.phoneFormControl" mask="00 00000-0000||00 0000-0000">
+      <mat-error *ngIf="saleVal.phoneFormControl.invalid">{{saleVal.getPhoneErrorMessage()}}
+      </mat-error>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+      <mat-form-field class="field">
+        <mat-label class="label">CEP</mat-label>
+        <input matInput class="field-line" name="address.postalCode" [(ngModel)]="salesService.sale.address.postalCode"
+          mask="00000-000" [formControl]="saleVal.postalCodeFormControl">
+        <mat-error *ngIf="saleVal.postalCodeFormControl.invalid">{{saleVal.getPostalCodeErrorMessage()}}
+        </mat-error>
+      </mat-form-field>
+      <button mat-icon-button style="color: #003f63" (click)="getAddress()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <div [fxLayout]="layoutStyle()" fxLayoutAlign="center center" fxLayoutGap="15px">
+      <mat-form-field class="field">
+        <mat-label class="label">Endereço</mat-label>
+        <input matInput class="field-line" name="street" [(ngModel)]="salesService.sale.address.street"
+          [formControl]="saleVal.streetFormControl">
+        <mat-error *ngIf="saleVal.streetFormControl.invalid">{{saleVal.getStreetErrorMessage()}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="field" [ngStyle]="{'width': (innerWidth>1000) ? '60px' : '100%'}">
+        <mat-label class="label">{{innerWidth>1000 ? 'Num.' : 'Número(Ex.: 41)'}}</mat-label>
+        <input matInput class="field-line" name="number" [(ngModel)]="salesService.sale.address.number"
+          [formControl]="saleVal.numberFormControl">
+        <mat-error *ngIf="saleVal.numberFormControl.invalid">{{saleVal.getNumberErrorMessage()}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field class="field">
+      <mat-label class="label">Complemento</mat-label>
+      <input matInput class="field-line" name="address.complement" [(ngModel)]="salesService.sale.address.complement">
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label class="label">Bairro</mat-label>
+      <input matInput class="field-line" name="address.district" [(ngModel)]="salesService.sale.address.district"
+        [formControl]="saleVal.districtFormControl">
+      <mat-error *ngIf="saleVal.districtFormControl.invalid">{{saleVal.getDistrictErrorMessage()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label class="label">Cidade</mat-label>
+      <input matInput class="field-line" name="address.city" [(ngModel)]="salesService.sale.address.city"
+        [formControl]="saleVal.cityFormControl">
+      <mat-error *ngIf="saleVal.cityFormControl.invalid">{{saleVal.getCityErrorMessage()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label class="label">Estado</mat-label>
+      <input matInput class="field-line" name="address.state" [(ngModel)]="salesService.sale.address.state"
+        [formControl]="saleVal.stateFormControl">
+      <mat-error *ngIf="saleVal.stateFormControl.invalid">{{saleVal.getStateErrorMessage()}}
+      </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="25px" style="padding-bottom: 25px;">
+      <button mat-button class="button" (click)="next()">Prosseguir</button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="background">
+
+  <span [ngStyle]="{'margin-top': (innerWidth>1000) ? '10px': '60px'}"
+    style="font-size:48px; color: white; line-height: normal;">SELECIONE SEU PLANO</span>
+  <br>
+  <br>
+  <div [fxLayout]="layoutStyle()" fxLayoutAlign="center center" fxLayoutGap="55px" *ngIf="selectedPlan">
+    <plan-card *ngFor="let p of plansService.plans"
+      [ngStyle]="{'-webkit-filter' : (p.isChecked) ? 'grayscale(0%)' : 'grayscale(100%)'}" [title]="p.title"
+      [price]="p.price" [period]="p.period" [mat_icon]="p.mat_icon" (click)="selectPlan(p)">
+    </plan-card>
+  </div>
+
+  <div [fxLayout]="layoutStyle()" fxLayoutAlign="center center" fxLayoutGap="55px" *ngIf="!selectedPlan">
+    <plan-card *ngFor="let p of plansService.plans" [title]="p.title" [price]="p.price" [period]="p.period"
+      [mat_icon]="p.mat_icon" (click)="selectPlan(p)">
+    </plan-card>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div fxLayout="row" class="footer" fxLayoutGap="20px"
+    [fxLayoutAlign]="(innerWidth > 1000)? 'start center' : 'center center'">
+    <span *ngIf="innerWidth>1000">Plano Selecionado:</span>
+    <mat-chip-list *ngIf="selectedPlan && innerWidth>1000">
+      <mat-chip
+        style=" padding: 12px 18px; color:white; background: linear-gradient(90deg, rgba(125,109,229,1) 0%, rgba(94,143,247,1) 100%);">
+        {{selectedPlan.title}}
+      </mat-chip>
+    </mat-chip-list>
+    <div class="spacer" *ngIf="innerWidth>1000"></div>
+    <button mat-button class="button" [ngStyle]="{'-webkit-filter' : (selectedPlan
+      ) ? 'grayscale(0%)' : 'grayscale(100%)'}" (click)="next()">Prosseguir</button>
+  </div>
+  <mat-toolbar class="toolbar">
+    <button mat-icon-button (click)="back()">
+      <mat-icon style="color: white">arrow_back</mat-icon>
+    </button>
+    <span style="color: white; margin-left:8px;">Planos</span>
+    <div class="spacer"></div>
+    <img src="../../../assets/logo-anotaAI-horizontal-white.svg" style="height: 90%;">
+  </mat-toolbar>
+</div>
