@@ -26,7 +26,7 @@ module.exports = establishmentServices = {
     });
   },
 
-  updateEstablishmentUserId: (establishmentId, userId, cpf_cnpj) => {
+  updateEstablishmentUserId: (establishmentId, userId, cpf_cnpj, email) => {
     return new Promise((resolve, reject) => {
       if (establishmentId) {
         const update = establishmentModel
@@ -38,6 +38,7 @@ module.exports = establishmentServices = {
               "sign.user": userId,
               "sign.cpf_cnpj": cpf_cnpj,
               "sign.active": false,
+              "sign.email_invoice": email
             },
             {
               new: true,

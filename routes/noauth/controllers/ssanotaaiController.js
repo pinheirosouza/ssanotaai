@@ -107,6 +107,7 @@ module.exports = userController = {
     let userId = req.register.user._id;
     let pageId = req.register.page._id;
     let cpf_cnpj = req.register.user.cpf;
+    let email = req.body.email
     let objCpfCnpj = {}
 
 
@@ -126,7 +127,7 @@ module.exports = userController = {
 
         let establishmentId = establishment.id;
         establishmentServices
-          .updateEstablishmentUserId(establishmentId, userId, objCpfCnpj)
+          .updateEstablishmentUserId(establishmentId, userId, objCpfCnpj, email)
           .then(() => {
             next();
           })
@@ -158,6 +159,7 @@ module.exports = userController = {
     let totalDiscount = [];
 
     let {
+      value_plan,
       max_parcel,
       discount,
       status,
@@ -198,6 +200,7 @@ module.exports = userController = {
             establishmentId,
             userId,
             max_parcel,
+            value_plan,
             membershipFee,
             discount,
             modulesArray,
