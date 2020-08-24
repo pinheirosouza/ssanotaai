@@ -41,6 +41,12 @@ import {
 const RxJS_Services = [HTTPListener, HTTPStatus];
 import { LoaderComponent } from './shared/components/loader/loader.component';
 
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +85,10 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     MatProgressSpinnerModule,
     MatDialogModule,
     NgxMaskModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
   ],
   providers: [
     {
