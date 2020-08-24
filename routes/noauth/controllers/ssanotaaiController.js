@@ -107,6 +107,17 @@ module.exports = userController = {
     let userId = req.register.user._id;
     let pageId = req.register.page._id;
     let cpf_cnpj = req.register.user.cpf;
+    let objCpfCnpj = {}
+
+
+    cpf_cnpj = cpf_cnpj.replace(/\D/g, "");
+    if (cpf_cnpj.length == 11) {
+      objCpfCnpj.type = "CPF";
+      objCpfCnpj.value = cpf_cnpj;
+    } else {
+      objCpfCnpj.type = "CNPJ";
+      objCpfCnpj.value = cpf_cnpj;
+    }
 
     establishmentServices
       .getEstablishmentByPage(pageId)
@@ -115,7 +126,7 @@ module.exports = userController = {
 
         let establishmentId = establishment.id;
         establishmentServices
-          .updateEstablishmentUserId(establishmentId, userId, cpf_cnpj)
+          .updateEstablishmentUserId(establishmentId, userId, objCpfCnpj)
           .then(() => {
             next();
           })
