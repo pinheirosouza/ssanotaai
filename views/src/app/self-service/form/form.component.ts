@@ -91,12 +91,13 @@ export class FormComponent implements OnInit {
       this.salesService.sale.membershipFee = 200;
       console.log('Venda final', this.salesService.sale);
       this.salesService.createSale().subscribe((res: any) => {
+        console.log(res);
         if (res.success) {
           window.open(res.info.link, '_self');
-          window.open(
-            'https://pagamento.anota.ai/payment/5f3702fe068acd002493ccc6',
-            '_self'
-          );
+          // window.open(
+          //   'https://pagamento.anota.ai/payment/5f3702fe068acd002493ccc6',
+          //   '_self'
+          // );
         } else {
           this.alertService.showAlert('Erro', res.message);
         }

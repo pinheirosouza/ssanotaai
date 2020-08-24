@@ -5,6 +5,16 @@
 export const environment = {
   production: false,
   url: 'https://staging-ssanotaai-api.herokuapp.com',
+  moskit: 'https://moskit.herokuapp.com/auth/moskit',
+  firebase: {
+    apiKey: 'AIzaSyATcmFVuIq51Csk75VcQLWPdO-1FgOQSMY',
+    authDomain: 'vendas-anotaai.firebaseapp.com',
+    databaseURL: 'https://vendas-anotaai.firebaseio.com',
+    projectId: 'vendas-anotaai',
+    storageBucket: 'vendas-anotaai.appspot.com',
+    messagingSenderId: '635630891816',
+    appId: '1:635630891816:web:0f4c7913b608a8ff',
+  },
 };
 
 /*
