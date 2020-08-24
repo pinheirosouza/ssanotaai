@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently \"nodemon app.js\" \"cd views && ng s --open\"",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "cd views && npm install"
   },
@@ -37,7 +37,8 @@
     "request": "^2.88.2",
     "socket.io": "^2.3.0",
     "socket.io-adapter-mongo": "^2.0.5",
-    "twilio": "^3.48.1"
+    "twilio": "^3.48.1",
+    "pm2": "*"
   },
   "engines": {
     "node": "12.16.3",
