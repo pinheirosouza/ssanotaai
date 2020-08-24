@@ -57,6 +57,29 @@ export class FormComponent implements OnInit {
       });
   }
 
+  cpfTest(strCPF) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+    if (strCPF == '00000000000') return false;
+
+    for (let i = 1; i <= 9; i++)
+      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+    Resto = (Soma * 10) % 11;
+
+    if (Resto == 10 || Resto == 11) Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+
+    Soma = 0;
+    for (let i = 1; i <= 10; i++)
+      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+
+    if (Resto == 10 || Resto == 11) Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+    return true;
+  }
+
   back() {
     this.router.navigate(['modules']);
   }
@@ -76,6 +99,8 @@ export class FormComponent implements OnInit {
       this.saleVal.stateFormControl.invalid
     ) {
       this.alertService.showAlert('Erro', 'Complete os campos corretamente');
+    } else if (this.cpfTest(this.salesService.sale.cpf) == false) {
+      this.alertService.showAlert('Erro', 'CPF inválido. Tente Novamente!');
     } else {
       let modulesList = [];
       for (let i = 0; i < this.modulesService.modules.length; i++) {
@@ -93,6 +118,7 @@ export class FormComponent implements OnInit {
       this.salesService.createSale().subscribe((res: any) => {
         console.log(res);
         if (res.success) {
+          this.router.navigate(['loading-payment']);
           window.open(res.info.link, '_self');
           // window.open(
           //   'https://pagamento.anota.ai/payment/5f3702fe068acd002493ccc6',
@@ -100,9 +126,11 @@ export class FormComponent implements OnInit {
           // );
         } else {
           this.alertService.showAlert('Erro', res.message);
+          if (!this.salesService.sale.value_plan) {
+            this.router.navigate(['plans']);
+          }
         }
       });
-      this.router.navigate(['loading-payment']);
       console.log(this.salesService.sale);
     }
   }
