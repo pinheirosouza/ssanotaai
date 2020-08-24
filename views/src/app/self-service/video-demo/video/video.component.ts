@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 import { VideoService } from './video.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-video',
@@ -7,6 +8,7 @@ import { VideoService } from './video.service';
   styleUrls: ['./video.component.scss'],
 })
 export class VideoComponent implements OnInit {
+  public videoUrl = environment.videoUrl;
   public innerWidth;
   constructor(public videoService: VideoService, public elem: ElementRef) {}
 
