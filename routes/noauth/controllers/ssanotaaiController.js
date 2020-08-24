@@ -144,11 +144,11 @@ module.exports = userController = {
     const establishmentId = req.register.establishment.id;
 
     let totalModules = [];
-    // let totalDiscount = [];
+    let totalDiscount = [];
 
     let {
       max_parcel,
-      //discount,
+      discount,
       status,
       closer,
       comments,
@@ -157,18 +157,29 @@ module.exports = userController = {
     let membershipFee = 200;
 
     for (let i = 0; i < modulesArray.length; i++) {
-      totalModules.push(parseInt(modulesArray[i].value));
+      totalModules.push(parseFloat(modulesArray[i].value));
     }
-    // for (let i = 0; i < discount.length; i++) {
-    //   totalDiscount.push(parseInt(discount[i].value));
-    // }
+    if (!discount) {
+      discount = [
+        {
+          value: 0,
+          description: null,
+        },
+      ];
+    } else {
+      for (let i = 0; i < discount.length; i++) {
+        totalDiscount.push(parseFloat(discount[i].value));
+      }
+    }
 
     plansServices
       .getPlanById(planId)
       .then((plan) => {
         let modulesSum = totalModules.reduce((a, b) => a + b, 0);
-        // let discountSum = totalDiscount.reduce((a, b) => a + b, 0);
-        let saleTotal = plan.price + membershipFee + (modulesSum * plan.period); //- discountSum;
+        let discountSum = totalDiscount.reduce((a, b) => a + b, 0);
+        let saleTotal =
+          plan.price + membershipFee + (modulesSum * plan.period) - discountSum;
+
         salesServices
           .createSale(
             pageId,
@@ -177,7 +188,7 @@ module.exports = userController = {
             userId,
             max_parcel,
             membershipFee,
-            //discount,
+            discount,
             modulesArray,
             status,
             saleTotal,

@@ -1,0 +1,15 @@
+<br>
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="25px" class="shadow-retangle"
+  [ngStyle]="{'padding' : (innerWidth < 1000) ? '0px' : '30px' ,'box-shadow' : (innerWidth < 1000) ? 'none' : ' 0 6px 20px 0 rgba(0, 0, 0, 0.19)' }">
+  <div fxLayout="column" fxLayoutGap="8px">
+    <br *ngIf="innerWidth<1000">
+    <span class="intro" style="line-height: 25px"><span class="client-name">Pronto!</span><br> Agora você já
+      pode adiquirir<br> a nossa
+      ferramenta.
+      <br><span style="font-size: 18px;line-height: 22px">Clique em prosseguir para ver nossos planos e módulos.</span>
+    </span>
+  </div>
+  <img *ngIf="innerWidth > 1000" src="../../../../assets/logo-anotaAI.svg">
+
+</div>
+<br>

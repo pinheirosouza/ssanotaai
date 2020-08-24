@@ -1,0 +1,51 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="background" style="padding: 80px;">
+  <br>
+  <span
+    [ngStyle]="{'text-align': (innerWidth>1000) ? 'auto' : 'center', 'font-size': (innerWidth>1000) ? '37px' : '180%'}"
+    style="color: white; line-height: normal;">SELECIONE SEUS MÓDULOS ABAIXO:</span>
+  <br>
+  <br>
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px">
+    <div [fxLayout]="layoutStyle()" fxLayoutAlign="center center" fxLayoutGap="0px"
+      style="height: auto; background-color: white; box-shadow: 3px 7px 7px #505050;"
+      *ngFor="let m of modulesService.modules; let i = index" (click)="moduleCheck(m)">
+
+      <img [src]="m.ssimage"
+        [ngStyle]="{'-webkit-filter' : (m.isChecked) ? 'grayscale(0%)' : 'grayscale(100%)','width': (innerWidth>1000) ? '400px' : '320px'}"
+        *ngIf="i%2 == 1 || innerWidth < 1000">
+      <div fxLayout="column" fxLayoutAlign="center center" style="width: 300px; text-align: center; padding: 20px "
+        fxLayoutGap="10px">
+        <span style="font-size: 25px; line-height: normal;">{{m.title}}</span>
+        <span>{{m.description}}</span>
+        <span style="font-size:38px; line-height:normal">R${{m.base_price}}<span style="font-size: medium;">p/
+            mês</span></span>
+        <button mat-button class="button"
+          [ngStyle]="{'background' : (m.isChecked) ? 'green' : 'linear-gradient(130deg, #FC6FC3 0%, #FC806F 100%);'}">{{(m.isChecked) ? 'Selecionado' : 'Selecionar'}}</button>
+      </div>
+      <img [src]="m.ssimage" style="width: 400px;"
+        [ngStyle]="{'-webkit-filter' : (m.isChecked) ? 'grayscale(0%)' : 'grayscale(100%)','width': (innerWidth>1000) ? '400px' : '320px'}"
+        *ngIf="i%2 != 1 && innerWidth > 1000">
+    </div>
+  </div>
+  <br>
+  <br>
+  <div fxLayout="row" class="footer" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <!-- <span *ngIf="innerWidth>1000">Plano Selecionado:</span>
+    <mat-chip-list *ngIf="selectedPlan">
+      <mat-chip
+        style=" padding: 12px 18px; color:white; background: linear-gradient(90deg, rgba(125,109,229,1) 0%, rgba(94,143,247,1) 100%);">
+        {{selectedPlan.title}}
+      </mat-chip>
+    </mat-chip-list> -->
+    <!-- <div class="spacer"></div> -->
+    <button mat-button class="button" (click)="next()">Prosseguir</button>
+  </div>
+  <mat-toolbar class="toolbar">
+    <button mat-icon-button (click)="back()">
+      <mat-icon style="color: white">arrow_back</mat-icon>
+    </button>
+    <span style="color: white; margin-left:8px;">Módulos</span>
+    <div class="spacer"></div>
+    <img src="../../../assets/logo-anotaAI-horizontal-white.svg" style="height: 90%;">
+  </mat-toolbar>
+</div>

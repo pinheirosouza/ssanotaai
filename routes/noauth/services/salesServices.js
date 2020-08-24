@@ -25,7 +25,7 @@ module.exports = salesServices = {
     user,
     max_parcel,
     membershipFee,
-    //discount,
+    discount,
     modules,
     status,
     total,
@@ -41,7 +41,7 @@ module.exports = salesServices = {
           user,
           max_parcel,
           membershipFee,
-          //discount,
+          discount,
           modules,
           status,
           total,
@@ -87,6 +87,7 @@ module.exports = salesServices = {
       .populate({ path: "page", select: "nameId createdAt" })
       .populate({ path: "plan", select: "name title price period" })
       .populate({ path: "user", select: "name email address cpf phone" })
+      .populate({ path: "establishment", select: "sign" })
       .populate([
         {
           path: "modules",
