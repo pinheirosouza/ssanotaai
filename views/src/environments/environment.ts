@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   videoUrl: 'https://ssanotaai.s3-sa-east-1.amazonaws.com/demo_1.mp4',
-  // url: 'https://staging-ssanotaai-api.herokuapp.com',
-  url: 'http://localhost:3000',
+  url: 'https://staging-ssanotaai-api.herokuapp.com',
+  // url: 'http://localhost:3000',
   moskit: 'https://moskit.herokuapp.com/auth/moskit',
   firebase: {
     apiKey: 'AIzaSyATcmFVuIq51Csk75VcQLWPdO-1FgOQSMY',
