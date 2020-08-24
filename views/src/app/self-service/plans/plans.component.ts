@@ -53,6 +53,7 @@ export class PlansComponent implements OnInit {
   }
   next() {
     if (this.selectedPlan) {
+      this.salesService.sale.value_plan = this.selectedPlan.price;
       this.salesService.sale.plan_id = this.selectedPlan._id;
       this.salesService.sale.max_parcel = this.selectedPlan.period;
       console.log(this.salesService.sale);
