@@ -33,12 +33,12 @@
     "mongoose": "^5.9.25",
     "mongoose-paginate": "^5.0.3",
     "nodemon": "^2.0.4",
+    "pm2": "^4.4.1",
     "q": "^1.5.1",
     "request": "^2.88.2",
     "socket.io": "^2.3.0",
     "socket.io-adapter-mongo": "^2.0.5",
-    "twilio": "^3.48.1",
-    "pm2": "*"
+    "twilio": "^3.48.1"
   },
   "engines": {
     "node": "12.16.3",
